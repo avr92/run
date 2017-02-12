@@ -4,6 +4,10 @@ import datetime
 import pandas as pd
 import random 
 from sklearn.linear_model import LinearRegression
+import webbrowser
+
+def change(gps):
+	return "{0},{1}".format(gps[0],gps[1])
 
 def f(user_tracks):
 	length = []
@@ -11,7 +15,8 @@ def f(user_tracks):
 	disruptions = []
 	labels = ['Length', 'User', 'Disruption']
 
-	for track in user_tracks:
+	for j in xrange(0,len(user_tracks)):
+		track = user_tracks[j]
 		track.ret_start_stop()
 		length.append(vincenty(track.gps_start, track.gps_end).miles)
 		user.append(track.user)
@@ -55,11 +60,7 @@ def f(user_tracks):
 	print lm.score(datas,y)
 
 	for i in range(0,len(y)):
-		if y_pred > 0.4:
-	
-	# df = pd.DataFrame.from_records(datas,columns=labels)
-	# print df
-
-	# res = sm.ols(formula="y~length+user+disruptions",data=df).fit()
-
-	# print res.summary()
+		if y_pred[i] > 0.4:
+			gps_start = change(user_tracks[i].gps_start)
+			gps_end = change(user_tracks[i].gps_end)
+			webbrowser.open('http://demo.html/?origin={0}&dest={1}'.format(gps_start,gps_end))
