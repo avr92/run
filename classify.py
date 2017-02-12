@@ -63,5 +63,7 @@ def f(user_tracks):
 		if y_pred[i] > 0.4:
 			gps_start = change(user_tracks[i].gps_start)
 			gps_end = change(user_tracks[i].gps_end)
-			g = ""
 			webbrowser.open('http://demo-abhayk.rhcloud.com/?origin={0}&dest={1}'.format(gps_start,gps_end))
+			g = raw_input("Press e to Exit...")
+			if g == 'e' or g == 'E':
+				break
