@@ -58,9 +58,14 @@ def f(user_tracks):
 	y_pred = lm.predict(datas)
 	print y
 	print lm.score(datas,y)
-
+	count = 0
 	for i in range(0,len(y)):
 		if y_pred[i] > 0.4:
+			count += 1
+	print "The number of tracks:{0}".format(count)
+	for i in range(0,len(y)):
+		if y_pred[i] > 0.4:
+
 			gps_start = change(user_tracks[i].gps_start)
 			gps_end = change(user_tracks[i].gps_end)
 			webbrowser.open('http://demo-abhayk.rhcloud.com/?origin={0}&dest={1}'.format(gps_start,gps_end))
