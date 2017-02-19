@@ -13,7 +13,7 @@ tree = objectify.parse(base_file)
 
 print g
 tree1 = etree.XML(g)
-time = tree1.xpath('TrainingCenterDatabase/Activities/Activity/Lap/Track/Trackpoint/Time/text()')
+time = tree1.xpath('Activities/Activity/Lap/Track/Trackpoint/Time/text()')
 
 print(time)
 
