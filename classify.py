@@ -36,7 +36,7 @@ def f(user_tracks):
 					if flag == 0:
 						break
 					i += 1
-		disruptions.append(disp) 
+		disruptions.append(disp)
 
 	print length
 	print disruptions
@@ -72,3 +72,4 @@ def f(user_tracks):
 			g = raw_input("Press e to Exit...")
 			if g == 'e' or g == 'E':
 				break
+
