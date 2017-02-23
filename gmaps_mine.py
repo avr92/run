@@ -14,6 +14,9 @@ def isLon(g,i):
 
 lat = []
 lon = []
+lat_lon =[]
+
+gmaps = googlemaps.Client(key='AIzaSyCa0OIq7kHz5maDSHgvyZSosDg98Zc6kbI')	
 
 def find_all_lat_lon(data):
 	for g in data.split(","):
@@ -28,17 +31,29 @@ def find_all_lat_lon(data):
 				break
 
 def requiredArg (origin,dest):
-	gmaps = googlemaps.Client(key='AIzaSyCa0OIq7kHz5maDSHgvyZSosDg98Zc6kbI')	
-	print googlemaps.convert.latlng(origin)
+	# print googlemaps.convert.latlng(origin)
 	file = open("./sample_json","w")
 	direction_result = gmaps.directions(origin,
-								dest,
-                               	mode="walking")
+										dest,
+                               			mode="walking")
 	g = str(direction_result[0]['legs'])
 	find_all_lat_lon(g)
 
-requiredArg ('-33.8732,151.2061' , '-33.0732,151.0061')
-print len(lat)
-print lat
-print len(lon)
-print lon
+def withWaypoint(origin,dest,lat_longs):
+	direction_result = gmaps.directions(origin,
+										dest,
+										waypoints=lat_longs,
+                               			mode="walking")
+	print direction_result
+
+
+requiredArg ('42.346726,-71.092591' , '42.339072,-71.098954')
+# print len(lat)
+# print lat
+# print len(lon)
+# print lon
+
+for i in range(0,len(lat)):
+	lat_lon.append(lat[i]+","+lon[i])
+
+withWaypoint('42.346726,-71.092591' , '42.339072,-71.098954',lat_lon )
